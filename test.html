@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="diagram"></div>
+
+    <!-- Add JointJS library -->
+<script src="https://cdn.jsdelivr.net/npm/jointjs/dist/joint.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jointjs/dist/joint.min.css">
+
+</body>
+<script>
+    // Initialize the JointJS graph
+var graph = new joint.dia.Graph();
+
+// Create a paper (drawing surface) for the graph
+var paper = new joint.dia.Paper({
+    el: document.getElementById('diagram'),
+    model: graph,
+    width: 600,
+    height: 400,
+    gridSize: 10
+});
+
+// Add elements to the graph based on user input
+function addUserElement(x, y) {
+    var rect = new joint.shapes.standard.Rectangle();
+    rect.position(x, y);
+    rect.resize(100, 40);
+    rect.attr({
+        body: {
+            fill: 'lightblue'
+        },
+        label: {
+            text: 'User Element'
+        }
+    });
+    graph.addCell(rect);
+}
+
+// Example: Triggering element addition on a button click
+document.getElementById('addUserElementBtn').addEventListener('click', function() {
+    // Get coordinates or define default ones
+    var x = 100; 
+    var y = 100;
+    addUserElement(x, y);
+});
+
+</script>
+</html>
